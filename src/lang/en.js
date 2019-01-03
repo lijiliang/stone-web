@@ -2,6 +2,8 @@ export default {
   route: {
     system: 'System',
     systemLogs: 'Login logs',
+    systemAdmin: 'Admin List',
+    systemSensitive: 'Sensitive List',
     dashboard: 'Dashboard',
     introduction: 'Introduction',
     documentation: 'Documentation',

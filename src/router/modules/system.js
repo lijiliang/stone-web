@@ -19,16 +19,16 @@ const systemRouter = {
       meta: { title: 'systemLogs', noCache: true }
     },
     {
-      path: 'line',
-      component: () => import('@/views/charts/line'),
-      name: 'LineChart',
-      meta: { title: 'lineChart', noCache: true }
+      path: 'admin',
+      component: () => import('@/views/system/admin'),
+      name: 'systemAdmin',
+      meta: { title: 'systemAdmin', noCache: true }
     },
     {
-      path: 'mixchart',
-      component: () => import('@/views/charts/mixChart'),
-      name: 'MixChart',
-      meta: { title: 'mixChart', noCache: true }
+      path: 'sensitive',
+      component: () => import('@/views/system/sensitive'),
+      name: 'systemSensitive',
+      meta: { title: 'systemSensitive', noCache: true }
     }
   ]
 }
