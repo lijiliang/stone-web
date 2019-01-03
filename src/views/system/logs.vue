@@ -9,9 +9,17 @@
         :label="item.label"
        >
       </el-table-column> -->
+    <div class="m-search">
+      用户名：<el-input
+        v-model="search"
+        class="search-input"
+        clear
+        placeholder="输入关键字搜索"/>
+    </div>
+
     <el-table
       v-loading="loading"
-      :data="list"
+      :data="list.filter(data => !search || data.username.toLowerCase().includes(search.toLowerCase()))"
       :height="fullHeight"
       style="width: 100%"
     >
@@ -41,13 +49,14 @@ const NAVBARHEIGHT = 170 // 导航高度
 export default {
   data() {
     return {
-      fullHeight: document.documentElement.clientHeight - NAVBARHEIGHT,
+      fullHeight: document.documentElement.clientHeight - NAVBARHEIGHT - 60,
       list: [],
       loading: true,
       total: 0, // 总页数
       currentPage: 1, // 当前页
       pageSize: 15,	// 每页显示条目个数
-      pageSizes: [15, 30, 50]
+      pageSizes: [15, 30, 50],
+      search: ''
     }
   },
   watch: {
@@ -72,7 +81,7 @@ export default {
     window.onresize = () => {
       return (() => {
         window.fullHeight = document.documentElement.clientHeight
-        that.fullHeight = window.fullHeight - NAVBARHEIGHT
+        that.fullHeight = window.fullHeight - NAVBARHEIGHT - 60
       })()
     }
   },
@@ -87,11 +96,13 @@ export default {
     },
     handleSizeChange(val) {
       this.pageSize = val
+      this.search = ''
       this.getList()
       // console.log(`每页 ${val} 条`)
     },
     handleCurrentChange(val) {
       this.currentPage = val
+      this.search = ''
       this.getList()
       // console.log(`当前页: ${val}`)
     }
@@ -99,6 +110,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.m-search{
+  padding: 10px;
+  border-bottom: 1px solid #ebeef5;
+  .search-input{
+    width: 250px;
+  }
+}
 </style>
