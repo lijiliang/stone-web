@@ -41,7 +41,23 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use(
-  response => response,
+  response => {
+    const res = response.data
+    // const status = response.status // 返回的状态码
+    // if (status !== 200) {
+    //   if (status === 0) {
+    //     Message({
+    //       message: '服务器连接失败！',
+    //       type: 'error',
+    //       duration: 5 * 1000
+    //     })
+    //   }
+    //   return Promise.reject('error')
+    // } else {
+    //   return res
+    // }
+    return res
+  },
   /**
    * 下面的注释为通过在response里，自定义code来标示请求状态
    * 当code返回如下情况则说明权限有问题，登出并返回到登录页

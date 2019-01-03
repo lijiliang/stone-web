@@ -137,7 +137,7 @@ code {
 }
 
 .pagination-container {
-  margin-top: 30px;
+  // margin-top: 30px;
 }
 
 .text-center {
@@ -190,4 +190,107 @@ code {
 
 .multiselect--active {
   z-index: 1000 !important;
+}
+
+//main-container全局样式
+.app-container {
+  padding: 20px;
+}
+
+.bgwhite {
+  background: #fff;
+}
+
+.components-container {
+  margin: 15px 15px 0 15px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.pagination-container {
+  padding: 15px 10px;
+}
+
+.text-center {
+  text-align: center
+}
+
+.sub-navbar {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 20px;
+  transition: 600ms ease position;
+  background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+  &.draft {
+    background: #d0d0d0;
+  }
+  &.deleted {
+    background: #d0d0d0;
+  }
+}
+
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
+}
+
+.filter-container {
+  padding-bottom: 10px;
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
+}
+
+// 定义messageBox错误提示弹出层
+.messagebox-error-tip{
+  width: 650px;
+  .message-err{
+    color: #f56c6c;
+  }
+}
+
+// 分页带下载
+.page-foot{
+  .pagination-container{
+    float: left;
+  }
+  .btn-down{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    float: left;
+  }
+}
+
+//颜色定义
+.c-success{
+  color: #67c23a
+}
+.c-danger{
+  color: #f56c6c;
+}
+.c-info{
+  color: #909399;
 }

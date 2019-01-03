@@ -1,5 +1,7 @@
 export default {
   route: {
+    system: 'System',
+    systemLogs: 'Login logs',
     dashboard: 'Panel de control',
     introduction: 'Introducción',
     documentation: 'Documentación',
