@@ -94,7 +94,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AddUser from './components/add'
+import AddUser from './components/adduser'
 import { getUser, deleteUser } from '@/api/user'
 const NAVBARHEIGHT = 170 // 导航高度
 export default {
@@ -173,7 +173,7 @@ export default {
         type: 'warning'
       }).then(() => {
         deleteUser(userid).then((res) => {
-          const { success, message } = res
+          const { success, message } = res || {}
           if (success) {
             this.$message({
               type: 'success',
