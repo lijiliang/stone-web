@@ -27,7 +27,7 @@
         type="index"
         width="50"/>
       <el-table-column prop="content" label="内容"/>
-      <el-table-column prop="username" label="姓名"/>
+      <el-table-column prop="username" label="用户名"/>
       <el-table-column prop="last_login_ip" label="客户端ip"/>
       <el-table-column prop="last_login_time" label="最后登录时间"/>
     </el-table>

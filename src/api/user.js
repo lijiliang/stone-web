@@ -28,3 +28,37 @@ export function deleteUser(userid) {
     method: 'delete'
   })
 }
+
+/**
+ * 获取单个用户
+ * @param {String} userid 用户id
+ */
+export function getUserid(userid) {
+  return request({
+    url: `${Urls.user}/${userid}`,
+    method: 'get'
+  })
+}
+
+/**
+ * 创建用户
+ */
+export function postUser(data) {
+  return request({
+    url: `${Urls.user}`,
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 更新单个用户
+ * @param {String} userid 用户id
+ */
+export function putUserid(userid, data) {
+  return request({
+    url: `${Urls.user}/${userid}`,
+    method: 'put',
+    data
+  })
+}

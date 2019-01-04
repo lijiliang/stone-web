@@ -96,6 +96,18 @@ service.interceptors.response.use(
 
     const response = error.response
     const _status = response.status
+    if (_status === 401) {
+      // 会话已过期
+      MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        store.dispatch('FedLogOut').then(() => {
+          location.reload() // 为了重新实例化vue-router对象 避免bug
+        })
+      })
+    }
     if (_status === 400 || _status === 422) {
       if (!response.data.success) {
         Message({

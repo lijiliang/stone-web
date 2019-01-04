@@ -60,7 +60,7 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            @click="handleEdit(scope.row.userid)">编辑</el-button>
           <el-button type="danger" size="mini" @click="handleDeleteUser(scope.row.userid)">删除</el-button>
         </template>
       </el-table-column>
@@ -74,14 +74,34 @@
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"/>
+
+    <!-- 添加用户弹出层 -->
+    <el-dialog
+      :visible.sync="isAddUserDialog"
+      :before-close="handleClose"
+      :title="titleMap[titleState]"
+      width="500px"
+      custom-class="m-adduser-dialog">
+      <add-user :edituserid="edituserid"/>
+      <!-- <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span> -->
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import AddUser from './components/add'
 import { getUser, deleteUser } from '@/api/user'
 const NAVBARHEIGHT = 170 // 导航高度
 export default {
   name: 'SystemAdmin',
+  components: {
+    AddUser
+  },
   data() {
     return {
       fullHeight: document.documentElement.clientHeight - NAVBARHEIGHT - 60,
@@ -92,12 +112,22 @@ export default {
       pageSize: 15,	// 每页显示条目个数
       pageSizes: [15, 30, 50],
       search: '',
-      sex: ['未知', '男', '女'],
+      sex: ['保密', '男', '女'],
       state: ['禁用', '正常', '未验证'],
       multipleSelection: [], // 多选列表，全部信息
       selectIds: [], // 选中的id
-      deleteVisible: false
+      titleMap: {
+        'edit': '编辑用户',
+        'add': '添加用户'
+      },
+      titleState: 'add',
+      edituserid: '' // 编辑的userid
     }
+  },
+  computed: {
+    ...mapGetters([
+      'isAddUserDialog'
+    ])
   },
   watch: {
     fullHeight(val) {
@@ -181,8 +211,22 @@ export default {
       this.getList()
       // console.log(`当前页: ${val}`)
     },
+    // 编辑用户
+    handleEdit(userid) {
+      this.titleState = 'edit'
+      this.edituserid = userid
+      this.$store.commit('SET_ADDUSER_VISIBLE', true)
+    },
+    // 添加用户
     handleAddUser() {
-
+      this.titleState = 'add'
+      this.edituserid = ''
+      this.$store.commit('SET_ADDUSER_VISIBLE', true)
+    },
+    // 关闭弹出层
+    handleClose(done) {
+      this.edituserid = ''
+      this.$store.commit('SET_ADDUSER_VISIBLE', false)
     }
   }
 }
