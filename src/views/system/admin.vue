@@ -82,7 +82,7 @@
       :title="titleMap[titleState]"
       width="500px"
       custom-class="m-adduser-dialog">
-      <add-user :edituserid="edituserid"/>
+      <add-user :edituserid="edituserid" @successCb="handleUserSuccess"/>
       <!-- <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -227,6 +227,12 @@ export default {
     handleClose(done) {
       this.edituserid = ''
       this.$store.commit('SET_ADDUSER_VISIBLE', false)
+    },
+    // 更新或添加用户成功后重新获取更新列表
+    handleUserSuccess(data) {
+      if (data) {
+        this.getList()
+      }
     }
   }
 }

@@ -6,10 +6,10 @@
     <el-form-item label="邮箱" prop="email">
       <el-input v-model="ruleForm.email" placeholder="邮箱"/>
     </el-form-item>
-    <el-form-item label="密码" prop="password">
+    <el-form-item v-if="!edituserid" label="密码" prop="password">
       <el-input v-model="ruleForm.password" type="password" placeholder="密码"/>
     </el-form-item>
-    <el-form-item label="确认密码" prop="repeatPassword">
+    <el-form-item v-if="!edituserid" label="确认密码" prop="repeatPassword">
       <el-input v-model="ruleForm.repeatPassword" type="password" placeholder="确认密码"/>
     </el-form-item>
     <el-form-item label="手机号码" prop="mobile">
@@ -169,6 +169,7 @@ export default {
           message: message
         })
         this.$store.commit('SET_ADDUSER_VISIBLE', false)
+        this.$emit('successCb', true)
       } else {
         this.$message.error(message)
       }
@@ -202,6 +203,7 @@ export default {
           message: message
         })
         this.$store.commit('SET_ADDUSER_VISIBLE', false)
+        this.$emit('successCb', true)
       } else {
         this.$message.error(message)
       }
