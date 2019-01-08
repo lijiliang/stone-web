@@ -107,6 +107,7 @@ service.interceptors.response.use(
           location.reload() // 为了重新实例化vue-router对象 避免bug
         })
       })
+      return
     }
     if (_status === 400 || _status === 422) {
       if (!response.data.success) {

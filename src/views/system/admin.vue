@@ -56,12 +56,20 @@
       </el-table-column>
       <el-table-column prop="last_login_ip" label="最后登录ip"/>
       <el-table-column prop="last_login_time" label="最后登录时间" min-width="100"/>
-      <el-table-column label="操作" fixed="right" min-width="100">
+      <el-table-column label="操作" fixed="right" min-width="90">
         <template slot-scope="scope">
           <el-button
+            type="primary"
             size="mini"
-            @click="handleEdit(scope.row.userid)">编辑</el-button>
-          <el-button type="danger" size="mini" @click="handleDeleteUser(scope.row.userid)">删除</el-button>
+            round
+            icon="el-icon-edit"
+            @click="handleEdit(scope.row.userid)"/>
+          <el-button
+            type="danger"
+            icon="el-icon-delete"
+            round
+            size="mini"
+            @click="handleDeleteUser(scope.row.userid)"/>
         </template>
       </el-table-column>
     </el-table>
