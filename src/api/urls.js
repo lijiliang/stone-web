@@ -7,5 +7,6 @@ export default {
   logs: '/api/v1/logs', // 登录日志
   user: '/api/v1/user', // 用户管理
   sensitivetype: '/api/v1/sensitivetype', // 敏感词列表
-  sensitive: '/api/v1/sensitive' // 敏感词列表
+  sensitive: '/api/v1/sensitive', // 敏感词列表
+  interface: '/api/v1/interface' // 接口管理
 }

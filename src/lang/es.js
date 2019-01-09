@@ -4,6 +4,7 @@ export default {
     systemLogs: 'Login logs',
     systemAdmin: 'Admin List',
     systemSensitive: 'Sensitive List',
+    systemInterface: 'Interface',
     dashboard: 'Panel de control',
     introduction: 'Introducción',
     documentation: 'Documentación',

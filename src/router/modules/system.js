@@ -29,6 +29,12 @@ const systemRouter = {
       component: () => import('@/views/system/sensitive'),
       name: 'systemSensitive',
       meta: { title: 'systemSensitive', noCache: true }
+    },
+    {
+      path: 'interface',
+      component: () => import('@/views/system/interface'),
+      name: 'systemInterface',
+      meta: { title: 'systemInterface', noCache: true }
     }
   ]
 }
