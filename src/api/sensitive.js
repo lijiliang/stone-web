@@ -69,7 +69,7 @@ export function putSensitiveid(id, data) {
 }
 
 /**
- * 更新多个敏感词
+ * 删除多个敏感词
  * @param {Object} data 敏感词ids {ids: '1,2,3'}
  */
 export function deleteSensitiveIds(data) {

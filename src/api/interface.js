@@ -2,7 +2,7 @@
  * @Author: Benson
  * @Date: 2019-01-08 18:17:31
  * @LastEditors: Benson
- * @LastEditTime: 2019-01-09 15:05:56
+ * @LastEditTime: 2019-01-09 15:38:24
  * @Description: 接口管理 api
  */
 
@@ -48,6 +48,18 @@ export function putInterface(id, data) {
   return request({
     url: `${Urls.interface}/${id}`,
     method: 'put',
+    data
+  })
+}
+
+/**
+ * 删除多个敏感词
+ * @param {Object} data 敏感词ids {ids: '1,2,3'}
+ */
+export function deleteInterfaceeIds(data) {
+  return request({
+    url: `${Urls.interface}`,
+    method: 'delete',
     data
   })
 }
