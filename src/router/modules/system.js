@@ -13,6 +13,12 @@ const systemRouter = {
   },
   children: [
     {
+      path: 'role',
+      component: () => import('@/views/system/role'),
+      name: 'systemRole',
+      meta: { title: 'systemRole', noCache: true }
+    },
+    {
       path: 'logs',
       component: () => import('@/views/system/logs'),
       name: 'systemLogs',

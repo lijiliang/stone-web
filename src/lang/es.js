@@ -5,6 +5,7 @@ export default {
     systemAdmin: 'Admin List',
     systemSensitive: 'Sensitive List',
     systemInterface: 'Interface',
+    systemRole: 'Role',
     dashboard: 'Panel de control',
     introduction: 'Introducción',
     documentation: 'Documentación',
