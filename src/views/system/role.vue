@@ -56,6 +56,8 @@
         <template slot-scope="scope">
           <el-button type="primary" title="编辑" size="mini" icon="el-icon-edit" circle @click="openEditForm(scope.row)"/>
           <el-button type="danger" title="删除" size="mini" icon="el-icon-delete" circle @click="handleDel(scope.row.id)"/>
+          <el-button type="warning" title="用户列表" size="mini" icon="el-icon-share" circle @click="openRoleUserDialog(scope.row)"/>
+          <el-button title="权限" size="mini" icon="el-icon-setting" circle @click="openPermissionDialog(scope.row)"/>
         </template>
       </el-table-column>
 
@@ -66,16 +68,18 @@
     </template>
 
     <edit-form :entity="entity" v-model="editFormVisible" @submit="getList" />
+    <role-user :role="role" v-model="roleUserDialogVisible" />
   </container-full>
 </template>
 
 <script>
 import ContainerFull from '@/components/ContainerFull'
 import editForm from './components/roleEditForm'
+import roleUser from './components/roleUser'
 import * as roleService from '@/api/permissions/role'
 export default {
   name: 'RolePage',
-  components: { ContainerFull, editForm },
+  components: { ContainerFull, editForm, roleUser },
   data() {
     return {
       searchForm: {
@@ -97,7 +101,10 @@ export default {
         order: ''
       },
       entity: {},
-      editFormVisible: false
+      role: { id: '', name: '' },
+      editFormVisible: false,
+      permissionDialogVisible: false,
+      roleUserDialogVisible: false
     }
   },
   mounted() {
@@ -206,6 +213,14 @@ export default {
         })
       }).catch(() => {
       })
+    },
+    openPermissionDialog(role) {
+      this.role = role
+      this.permissionDialogVisible = true
+    },
+    openRoleUserDialog(role) {
+      this.role = role
+      this.roleUserDialogVisible = !this.roleUserDialogVisible
     }
   }
 }

@@ -9,5 +9,6 @@ export default {
   sensitivetype: '/api/v1/sensitivetype', // 敏感词管理
   sensitive: '/api/v1/sensitive', // 敏感词管理
   role: '/api/admin/v1/role', // 角色管理
+  roleuser: '/api/admin/v1/roleuser', // 角色与用户关联
   interface: '/api/v1/interface' // 接口管理
 }

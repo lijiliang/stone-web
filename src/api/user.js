@@ -7,14 +7,20 @@ import Urls from './urls'
  * @param {Number} pageSize 每页多少条
  * @param {Number} userType 用户类型，1管理员，2普遍用户
  */
-export function getUser(current = 1, pageSize = 10, userType) {
-  let _userType = ''
-  if (userType) {
-    _userType = `&userType=${userType}`
-  }
+export function getUser(query) {
+  // let _userType = ''
+  // if (userType) {
+  //   _userType = `&userType=${userType}`
+  // }
+  // return request({
+  //   url: `${Urls.user}?current=${current}&pageSize=${pageSize}${_userType}`,
+  //   method: 'get'
+  // })
+
   return request({
-    url: `${Urls.user}?current=${current}&pageSize=${pageSize}${_userType}`,
-    method: 'get'
+    url: `${Urls.user}`,
+    method: 'get',
+    params: query
   })
 }
 

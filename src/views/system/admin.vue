@@ -166,7 +166,7 @@ export default {
   methods: {
     async getList() {
       this.loading = true
-      const { data, success } = await getUser(this.currentPage, this.pageSize)
+      const { data, success } = await getUser({ current: this.currentPage, pageSize: this.pageSize })
       if (success) {
         this.list = data.list
         this.total = data.total
