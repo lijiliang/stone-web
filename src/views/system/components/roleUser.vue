@@ -3,8 +3,8 @@
     <div slot="title">维护
     <el-tag>{{ role.name }}</el-tag>用户</div>
     <el-form ref="searchForm" :inline="true" :model="searchForm" size="mini" style="margin-bottom: -18px;">
-      <el-form-item label="名称" prop="name">
-        <el-input v-model="searchForm.name" placeholder="名称" style="width: 100px;" />
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="searchForm.username" placeholder="用户名" style="width: 100px;" />
       </el-form-item>
 
       <el-form-item label="邮箱" prop="email">
@@ -24,7 +24,7 @@
     </el-form>
 
     <el-table v-loading="loading" :data="tableData" size="small" stripe highlight-current-row style="width: 100%;" @sort-change="handleSortChange">
-      <el-table-column label="账号名称" prop="username">
+      <el-table-column label="账号名称" prop="username" sortable="custom">
         <template slot-scope="scope">
           {{ scope.row.username }}
         </template>
@@ -83,7 +83,7 @@ export default {
     return {
       dialogVisible: false,
       searchForm: {
-        name: '',
+        username: '',
         email: ''
       },
       loading: false,
@@ -119,9 +119,6 @@ export default {
         pageSize: this.page.pageSize,
         sortBy: this.sort.prop,
         descending: this.sort.order === 'descending',
-        roleId: this.role.id,
-        // ...this.searchForm
-        // descending: this.sort.order === 'descending',
         filter: { ...this.searchForm, roleId: this.role.id }
       }
       const { data, success } = await userService.getUser(query)
@@ -136,6 +133,7 @@ export default {
     },
     handleSearchFormReset() {
       this.$refs.searchForm.resetFields()
+      this.getTableData()
     },
     handleSortChange(val) {
       this.sort.prop = val.prop
