@@ -6,6 +6,7 @@ export default {
     systemSensitive: 'Sensitive List',
     systemInterface: 'Interface',
     systemRole: 'Role',
+    systemResource: 'Resource',
     dashboard: 'Panel de control',
     introduction: 'Introducción',
     documentation: 'Documentación',

@@ -13,22 +13,28 @@ const systemRouter = {
   },
   children: [
     {
+      path: 'admin',
+      component: () => import('@/views/system/admin'),
+      name: 'systemAdmin',
+      meta: { title: 'systemAdmin', noCache: true }
+    },
+    {
       path: 'role',
       component: () => import('@/views/system/role'),
       name: 'systemRole',
       meta: { title: 'systemRole', noCache: true }
     },
     {
+      path: 'resource',
+      component: () => import('@/views/system/resource'),
+      name: 'systemResource',
+      meta: { title: 'systemResource', noCache: true }
+    },
+    {
       path: 'logs',
       component: () => import('@/views/system/logs'),
       name: 'systemLogs',
       meta: { title: 'systemLogs', noCache: true }
-    },
-    {
-      path: 'admin',
-      component: () => import('@/views/system/admin'),
-      name: 'systemAdmin',
-      meta: { title: 'systemAdmin', noCache: true }
     },
     {
       path: 'sensitive',

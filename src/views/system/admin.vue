@@ -24,9 +24,9 @@
     <el-button type="primary" icon="el-icon-circle-plus" @click="handleAddUser">
       新增
     </el-button>
-    <!-- <el-button v-if="multipleSelection.length>0" type="danger" size="mini" icon="el-icon-delete" @click="handleDeleteIds">
+    <el-button v-if="multipleSelection.length>0" type="danger" icon="el-icon-delete" @click="handleDeleteIds">
       批量删除
-    </el-button> -->
+    </el-button>
     <el-popover placement="top-start" title="温馨提示" width="300" trigger="hover">
       <li>`用户名`与`邮箱`组合必须唯一</li>
       <el-button slot="reference" size="mini" icon="el-icon-info" style="float:right">
@@ -114,7 +114,7 @@
 import { mapGetters } from 'vuex'
 import ContainerFull from '@/components/ContainerFull'
 import AddUser from './components/adduser'
-import { getUser, deleteUser } from '@/api/user'
+import { getUser, deleteUser, deleteUserIds } from '@/api/user'
 export default {
   name: 'SystemAdmin',
   components: {
@@ -263,6 +263,30 @@ export default {
       if (data) {
         this.getList()
       }
+    },
+    // 指量删除
+    async handleDeleteIds() {
+      const ids = this.selectIds
+      const _data = {
+        ids: ids.join(',')
+      }
+      this.$confirm(`您确定要删除吗？`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteUserIds(_data).then((res) => {
+          const { success, message, data } = res || {}
+          if (success) {
+            this.$message({
+              type: 'success',
+              message: `${message},已成功删除${data.count}条数据`
+            })
+            this.getList()
+          }
+        })
+      }).catch(() => {
+      })
     }
   }
 }

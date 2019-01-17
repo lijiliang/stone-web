@@ -6,6 +6,7 @@ export default {
     systemSensitive: '敏感词列表',
     systemInterface: '接口管理',
     systemRole: '角色管理',
+    systemResource: '资源管理',
     dashboard: '首页',
     introduction: '简述',
     documentation: '文档',

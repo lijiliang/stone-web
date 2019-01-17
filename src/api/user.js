@@ -68,3 +68,15 @@ export function putUserid(userid, data) {
     data
   })
 }
+
+/**
+ * 批量删除用户
+ * @param {Object} data 用户ids {ids: '1,2,3'}
+ */
+export function deleteUserIds(data) {
+  return request({
+    url: `${Urls.user}`,
+    method: 'delete',
+    data
+  })
+}
