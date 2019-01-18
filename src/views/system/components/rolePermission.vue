@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     async dialogOpen() {
+      this.$refs.tree.setCheckedKeys([])
       const { success, data } = await resourceService.getResourceList()
       if (success) {
         this.permissionList = data
@@ -71,26 +72,28 @@ export default {
       if (rolePermissions.success) {
         rolePermissionList = rolePermissions && rolePermissions.data.resource_id.split(',')
       }
-      console.log(rolePermissionList)
-      // const rolePermissionList = rolePermissions.map(s => s.resource_id)
-      // console.log(rolePermissionList)
       this.$refs.tree.setCheckedKeys(rolePermissionList)
+      // this.$refs.tree.setCheckedNodes(rolePermissionList, false)
     },
     filterNode(value, data) {
       if (!value) return true
       return data.title.indexOf(value) !== -1
     },
     saveRolePermission() {
-      const checkedNodes = this.$refs.tree.getCheckedNodes(true, false)
+      // const checkedNodes = this.$refs.tree.getCheckedKeys(false, true)
+      const checkedNodes = this.$refs.tree.getCheckedNodes(false, true)
+      // console.log(checkedNodes)
       const checkedPermissins = []
       for (const checked of checkedNodes) {
-        checked.type === 2 && checkedPermissins.push(checked.id)
+        console.log(checked.type)
+        // checked.type === 2 && checkedPermissins.push(checked.id)
+        checkedPermissins.push(checked.id)
       }
       const data = {
         role_id: this.role.id,
+        // resource_id: checkedNodes
         resource_id: checkedPermissins
       }
-      console.log(data)
       this.loading = true
       roleService.savePermission(data).then(data => {
         this.loading = false
