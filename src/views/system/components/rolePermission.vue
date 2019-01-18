@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     async dialogOpen() {
-      this.$refs.tree.setCheckedKeys([])
       const { success, data } = await resourceService.getResourceList()
       if (success) {
         this.permissionList = data
@@ -70,29 +69,27 @@ export default {
       const rolePermissions = await roleService.getRolePermissions(this.role.id) || {}
       let rolePermissionList = []
       if (rolePermissions.success) {
-        rolePermissionList = rolePermissions && rolePermissions.data.resource_id.split(',')
+        rolePermissionList = rolePermissions && rolePermissions.data.resource_id_fe.split(',')
       }
       this.$refs.tree.setCheckedKeys(rolePermissionList)
-      // this.$refs.tree.setCheckedNodes(rolePermissionList, false)
     },
     filterNode(value, data) {
       if (!value) return true
       return data.title.indexOf(value) !== -1
     },
     saveRolePermission() {
-      // const checkedNodes = this.$refs.tree.getCheckedKeys(false, true)
+      const checkedNodesids = this.$refs.tree.getCheckedKeys(false, true) // 如果子级没有全选，不能选中父级id
       const checkedNodes = this.$refs.tree.getCheckedNodes(false, true)
-      // console.log(checkedNodes)
       const checkedPermissins = []
       for (const checked of checkedNodes) {
-        console.log(checked.type)
         // checked.type === 2 && checkedPermissins.push(checked.id)
         checkedPermissins.push(checked.id)
       }
       const data = {
         role_id: this.role.id,
         // resource_id: checkedNodes
-        resource_id: checkedPermissins
+        resource_id: checkedPermissins,
+        resource_id_fe: checkedNodesids // 前端专用,如子级没有全选中，则不会会有父级id
       }
       this.loading = true
       roleService.savePermission(data).then(data => {
