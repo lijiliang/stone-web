@@ -11,5 +11,7 @@ export default {
   role: '/api/admin/v1/role', // 角色管理
   roleuser: '/api/admin/v1/roleuser', // 角色与用户关联
   resource: '/api/admin/v1/resource', // 资源管理
+  roleresources: '/api/admin/v1/roleresources', // 获取角色与资源关联列表
+  saveresources: '/api/admin/v1/saveresources', // 保存角色与资源关联
   interface: '/api/v1/interface' // 接口管理
 }

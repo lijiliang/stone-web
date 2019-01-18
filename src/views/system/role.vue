@@ -69,6 +69,7 @@
 
     <edit-form :entity="entity" v-model="editFormVisible" @submit="getList" />
     <role-user :role="role" v-model="roleUserDialogVisible" />
+    <role-permission :role="role" v-model="permissionDialogVisible" />
   </container-full>
 </template>
 
@@ -76,10 +77,11 @@
 import ContainerFull from '@/components/ContainerFull'
 import editForm from './components/roleEditForm'
 import roleUser from './components/roleUser'
+import rolePermission from './components/rolePermission'
 import * as roleService from '@/api/permissions/role'
 export default {
   name: 'RolePage',
-  components: { ContainerFull, editForm, roleUser },
+  components: { ContainerFull, editForm, roleUser, rolePermission },
   data() {
     return {
       searchForm: {

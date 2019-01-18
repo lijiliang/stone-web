@@ -79,4 +79,6 @@ npm run lint
 npm run lint -- --fix
 ```
 
+## 记录
+[动态菜单](https://github.com/PanJiaChen/vue-element-admin/issues/167)
 更多信息请参考 [使用文档](https://panjiachen.github.io/vue-element-admin-site/zh/)

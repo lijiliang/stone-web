@@ -2,7 +2,7 @@
  * @Author: Benson
  * @Date: 2019-01-10 17:42:08
  * @LastEditors: Benson
- * @LastEditTime: 2019-01-10 17:44:12
+ * @LastEditTime: 2019-01-18 10:03:29
  * @Description: 角色管理 api
  */
 
@@ -53,7 +53,7 @@ export function putRole(id, data) {
 }
 
 /**
- * 删除多个敏感词
+ * 删除多个角色
  * @param {Object} data 敏感词ids {ids: '1,2,3'}
  */
 export function deleteRoleeIds(data) {
@@ -61,5 +61,22 @@ export function deleteRoleeIds(data) {
     url: `${Urls.role}`,
     method: 'delete',
     data
+  })
+}
+
+// 保存角色与资源关联
+export function savePermission(data) {
+  return request({
+    url: `${Urls.saveresources}`,
+    method: 'post',
+    data
+  })
+}
+
+// 获取角色与资源关联列表
+export function getRolePermissions(id) {
+  return request({
+    url: `${Urls.roleresources}/${id}`,
+    method: 'get'
   })
 }
