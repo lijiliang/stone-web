@@ -161,6 +161,16 @@
               />
             </el-form-item>
             <el-form-item
+              label="重定向路径"
+              prop="redirect"
+            >
+              <el-input
+                v-model="menuform.redirect"
+                :disabled="!formEdit"
+                placeholder="请输入重定向路径"
+              />
+            </el-form-item>
+            <el-form-item
               label="排序"
               prop="sort"
             >
@@ -252,7 +262,8 @@ export default {
         sort: 0,
         type: 1,
         isLock: false,
-        cache: false
+        cache: false,
+        redirect: '' // 重定向
       },
       typeOptions: [
         {
@@ -296,7 +307,8 @@ export default {
           sort: data.sort,
           type: data.type,
           isLock: data.isLock,
-          cache: data.cache
+          cache: data.cache,
+          redirect: data.redirect
         }
         this.currentId = id
       }
@@ -360,7 +372,8 @@ export default {
         sort: 0,
         type: 1,
         isLock: false,
-        cache: false
+        cache: false,
+        redirect: ''
       }
     },
     batchEdit() {

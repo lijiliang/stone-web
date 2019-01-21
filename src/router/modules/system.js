@@ -5,6 +5,7 @@ import Layout from '@/views/layout/Layout'
 const systemRouter = {
   path: '/system',
   component: Layout,
+  // component: () => import('@/views/layout/Layout'),
   redirect: 'noredirect',
   name: 'system',
   meta: {
@@ -16,7 +17,7 @@ const systemRouter = {
       path: 'admin',
       component: () => import('@/views/system/admin'),
       name: 'systemAdmin',
-      meta: { title: 'systemAdmin', noCache: true }
+      meta: { title: 'systemAdmin', icon: '', noCache: true }
     },
     {
       path: 'role',
