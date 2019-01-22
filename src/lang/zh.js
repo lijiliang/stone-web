@@ -8,6 +8,7 @@ export default {
     systemRole: '角色管理',
     systemResource: '资源管理',
     permissions: '权限管理',
+    Icons: '自定义图标',
     dashboard: '首页',
     introduction: '简述',
     documentation: '文档',

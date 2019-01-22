@@ -120,7 +120,7 @@
                 placeholder="请输入路径"
               />
             </el-form-item>
-            <el-form-item
+            <!-- <el-form-item
               label="图标"
               prop="icon"
             >
@@ -128,6 +128,16 @@
                 v-model="menuform.icon"
                 :disabled="!formEdit"
                 placeholder="请输入图标名"
+              />
+            </el-form-item> -->
+            <el-form-item
+              label="图标"
+              prop="icon"
+            >
+              <d2-icon-select
+                :disabled="!formEdit"
+                v-model="menuform.icon"
+                :user-input="true"
               />
             </el-form-item>
             <el-form-item

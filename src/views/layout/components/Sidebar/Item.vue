@@ -17,7 +17,10 @@ export default {
     const vnodes = []
 
     if (icon) {
-      vnodes.push(<svg-icon icon-class={icon}/>)
+      // vnodes.push(<svg-icon icon-class={icon}/>)
+
+      // 这里改成用iconfont的方式，方便后端直接选择图标
+      vnodes.push(<d2-icon name={icon}/>)
     }
 
     if (title) {

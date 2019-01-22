@@ -43,6 +43,16 @@
     .svg-icon {
       margin-right: 16px;
     }
+    .fa {
+      margin-right: 16px;
+
+      // width: 1em;
+      // height: 1em;
+      // vertical-align: -0.15em;
+      // fill: currentColor;
+      overflow: hidden;
+      color: currentColor;
+    }
     .el-menu {
       border: none;
       height: 100%;
@@ -50,6 +60,13 @@
     }
     .is-active > .el-submenu__title{
         color: #f4f4f5!important;
+    }
+    .el-menu--vertical{
+      .el-menu-item .fa{
+        margin-right: 16px;
+        overflow: hidden;
+        color: currentColor;
+      }
     }
   }
   .hideSidebar {
@@ -130,5 +147,14 @@
     .svg-icon{
       margin-right: 16px;
     }
+  }
+}
+
+
+.el-menu--vertical{
+  .el-menu-item i.fa{
+    margin-right: 16px;
+    overflow: hidden;
+    color: currentColor;
   }
 }

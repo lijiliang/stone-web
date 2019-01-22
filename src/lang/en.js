@@ -8,6 +8,7 @@ export default {
     systemRole: 'Role',
     systemResource: 'Resource',
     permissions: 'Permissions',
+    Icons: 'icons',
     dashboard: 'Dashboard',
     introduction: 'Introduction',
     documentation: 'Documentation',

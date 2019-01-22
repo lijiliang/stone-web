@@ -6,6 +6,7 @@
       <navbar/>
       <tags-view/>
       <app-main/>
+      <d2-icon/>
     </div>
   </div>
 </template>
