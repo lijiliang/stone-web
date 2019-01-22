@@ -91,16 +91,6 @@
               />
             </el-form-item>
             <el-form-item
-              label="name"
-              prop="name"
-            >
-              <el-input
-                v-model="menuform.name"
-                :disabled="!formEdit"
-                placeholder="请输入name"
-              />
-            </el-form-item>
-            <el-form-item
               label="标题"
               prop="title"
             >
@@ -108,6 +98,16 @@
                 v-model="menuform.title"
                 :disabled="!formEdit"
                 placeholder="请输入标题"
+              />
+            </el-form-item>
+            <el-form-item
+              label="name"
+              prop="name"
+            >
+              <el-input
+                v-model="menuform.name"
+                :disabled="!formEdit"
+                placeholder="请输入name"
               />
             </el-form-item>
             <el-form-item
@@ -150,7 +150,7 @@
                 placeholder="请输入组件"
               />
             </el-form-item>
-            <el-form-item
+            <!-- <el-form-item
               label="组件路径"
               prop="componentPath"
             >
@@ -159,7 +159,7 @@
                 :disabled="!formEdit"
                 placeholder="请输入组件路径"
               />
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item
               label="重定向路径"
               prop="redirect"
@@ -198,7 +198,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item
+            <!-- <el-form-item
               label="锁定"
               prop="isLock"
             >
@@ -206,7 +206,7 @@
                 v-model="menuform.isLock"
                 :disabled="!formEdit"
               />
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item label="keep-alive" prop="cache">
               <el-switch v-model="menuform.cache" :disabled="!formEdit"/>
             </el-form-item>

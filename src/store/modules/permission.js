@@ -1,4 +1,5 @@
-import { asyncRouterMap, constantRouterMap } from '@/router'
+// import { asyncRouterMap, constantRouterMap, routerComponents } from '@/router'
+import { constantRouterMap, routerComponents } from '@/router'
 
 /**
  * 通过meta.role判断是否与当前用户权限匹配
@@ -34,6 +35,24 @@ function filterAsyncRouter(routes, roles) {
   return res
 }
 
+function filterConvertAsyncRouter(routes) {
+  const res = []
+
+  routes.forEach(route => {
+    const tmp = { ...route }
+    const routerComponent = routerComponents[route.component]
+    if (routerComponent !== undefined) {
+      tmp.component = routerComponent.component
+    }
+    if (tmp.children) {
+      tmp.children = filterConvertAsyncRouter(tmp.children)
+    }
+    res.push(tmp)
+  })
+  res.push({ path: '*', redirect: '/404', hidden: true })
+  return res
+}
+
 const permission = {
   state: {
     routers: constantRouterMap,
@@ -49,11 +68,16 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
+        const { accessRouters } = data
+        const dynamicRouter = filterConvertAsyncRouter(accessRouters)
+        // console.log(dynamicRouter)
         let accessedRouters
         if (roles.includes('admin')) {
-          accessedRouters = asyncRouterMap
+          // accessedRouters = asyncRouterMap
+          accessedRouters = dynamicRouter
         } else {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
+          // accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
+          accessedRouters = filterAsyncRouter(dynamicRouter, roles)
         }
         commit('SET_ROUTERS', accessedRouters)
         resolve()

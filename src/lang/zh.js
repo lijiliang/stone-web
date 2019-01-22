@@ -7,6 +7,7 @@ export default {
     systemInterface: '接口管理',
     systemRole: '角色管理',
     systemResource: '资源管理',
+    permissions: '权限管理',
     dashboard: '首页',
     introduction: '简述',
     documentation: '文档',

@@ -6,7 +6,6 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/views/layout/Layout'
 import LayoutHome from '@/views/layout/LayoutHome'
-
 /* Router Modules */
 import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
@@ -386,3 +385,48 @@ export const asyncRouterMap = [
 
   { path: '*', redirect: '/404', hidden: true }
 ]
+
+// 定义路由与组件对应关系
+export const routerComponents = {
+  Layout: {
+    component: Layout
+  },
+  // 多层级路由
+  LayoutTree: {
+    component: () => import('@/views/layout/LayoutTree')
+  },
+  // 管理员列表
+  systemAdmin: {
+    component: () => import('@/views/system/admin')
+  },
+  // 角色列表
+  systemRole: {
+    component: () => import('@/views/system/role')
+  },
+  // 资源管理
+  systemResource: {
+    component: () => import('@/views/system/resource')
+  },
+  // 日志管理
+  systemLogs: {
+    component: () => import('@/views/system/logs')
+  },
+  // 接口管理
+  systemInterface: {
+    component: () => import('@/views/system/interface')
+  },
+  // 敏感词管理
+  systemSensitive: {
+    component: () => import('@/views/system/sensitive')
+  },
+  // 自定义图标
+  svgIcon: {
+    component: () => import('@/views/svg-icons/index')
+  },
+  TinymceDemo: {
+    component: () => import('@/views/components-demo/tinymce')
+  },
+  JsonEditorDemo: {
+    component: () => import('@/views/components-demo/jsonEditor')
+  }
+}

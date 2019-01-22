@@ -7,6 +7,7 @@ export default {
     systemInterface: 'Interface',
     systemRole: 'Role',
     systemResource: 'Resource',
+    permissions: 'Permissions',
     dashboard: 'Panel de control',
     introduction: 'Introducción',
     documentation: 'Documentación',

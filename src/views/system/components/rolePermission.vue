@@ -78,7 +78,7 @@ export default {
       return data.title.indexOf(value) !== -1
     },
     saveRolePermission() {
-      const checkedNodesids = this.$refs.tree.getCheckedKeys(false, true) // 如果子级没有全选，不能选中父级id
+      const checkedNodesids = this.$refs.tree.getCheckedKeys(true, false) // 如果子级没有全选，不能选中父级id
       const checkedNodes = this.$refs.tree.getCheckedNodes(false, true)
       const checkedPermissins = []
       for (const checked of checkedNodes) {
@@ -91,6 +91,7 @@ export default {
         resource_id: checkedPermissins,
         resource_id_fe: checkedNodesids // 前端专用,如子级没有全选中，则不会会有父级id
       }
+      // console.log(data)
       this.loading = true
       roleService.savePermission(data).then(data => {
         this.loading = false
