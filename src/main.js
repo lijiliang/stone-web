@@ -26,6 +26,7 @@ Vue.use(Element, {
   i18n: (key, value) => i18n.t(key, value)
 })
 
+// 引入全局组件
 Vue.component('d2-icon', () => import('./components/d2-icon/index.vue'))
 Vue.component('d2-icon-select', () => import('./components/d2-icon-select/index.vue'))
 

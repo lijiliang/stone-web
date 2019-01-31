@@ -15,7 +15,9 @@
       highlight-current
       node-key="id">
       <span slot-scope="{ node, data }">
-        <i v-if="data.type==2" class="fa fa-cog"/>&nbsp;{{ node.label }}
+        <!-- <i v-if="data.type==1" :class="[node.icon ? 'fa-file' : 'fa-cog']" class="fa"/>&nbsp;
+        <i v-if="data.type==2" :class="[node.icon ? 'fa-files-o' : 'fa-cog']" class="fa"/>&nbsp; -->
+        {{ node.label }}
       </span>
     </el-tree>
     <div slot="footer" class="dialog-footer">
