@@ -423,6 +423,14 @@ export const routerComponents = {
   svgIcon: {
     component: () => import('@/views/svg-icons/index')
   },
+  // 栏目管理
+  cmsCategory: {
+    component: () => import('@/views/cms/category')
+  },
+  // 文章管理
+  cmsArticle: {
+    component: () => import('@/views/cms/article')
+  },
   TinymceDemo: {
     component: () => import('@/views/components-demo/tinymce')
   },

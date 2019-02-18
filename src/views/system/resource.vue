@@ -185,7 +185,7 @@
               prop="sort"
             >
               <el-input
-                v-model="menuform.sort"
+                v-model.number="menuform.sort"
                 :disabled="!formEdit"
                 placeholder="请输入排序"
               />
