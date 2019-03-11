@@ -1,5 +1,5 @@
 <template>
-  <div class="container-full">
+  <div :class=" hasRelative ? 'container-full-relative': ''" class="container-full">
     <div v-if="$slots.header" ref="header" class="container-full__header">
       <slot name="header"/>
     </div>
@@ -14,7 +14,13 @@
 
 <script>
 export default {
-  name: 'ContainerFull'
+  name: 'ContainerFull',
+  props: {
+    hasRelative: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 <style scoped lang="scss">
@@ -50,6 +56,19 @@ export default {
     padding: 20px;
     border-top: 1px solid #ebeef5;
   }
+}
+.container-full-relative{
+  height: 100%;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 5px;
 }
 </style>
 

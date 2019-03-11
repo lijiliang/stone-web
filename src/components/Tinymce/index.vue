@@ -62,10 +62,13 @@ export default {
   },
   watch: {
     value(val) {
-      if (!this.hasChange && this.hasInit) {
-        this.$nextTick(() =>
-          window.tinymce.get(this.tinymceId).setContent(val || ''))
-      }
+      this.$nextTick(() =>
+        window.tinymce.get(this.tinymceId).setContent(val || '')
+      )
+      // if (!this.hasChange && this.hasInit) {
+      //   this.$nextTick(() =>
+      //     window.tinymce.get(this.tinymceId).setContent(val || ''))
+      // }
     },
     language() {
       this.destroyTinymce()
@@ -186,6 +189,7 @@ export default {
 .tinymce-container {
   position: relative;
   line-height: normal;
+  box-sizing: border-box;
 }
 .tinymce-container>>>.mce-fullscreen {
   z-index: 10000;
@@ -207,4 +211,5 @@ export default {
 .editor-upload-btn {
   display: inline-block;
 }
+
 </style>

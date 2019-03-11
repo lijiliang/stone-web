@@ -2,51 +2,51 @@
  * @Author: Benson
  * @Date: 2019-02-18 16:05:04
  * @LastEditors: Benson
- * @LastEditTime: 2019-03-07 11:13:53
- * @Description: 栏目管理
+ * @LastEditTime: 2019-03-07 11:14:42
+ * @Description: 文章管理
  */
 
 import request from '@/utils/request'
 import Urls from '../urls'
 
 // 获取列表
-export function getCategoryList(query) {
+export function getArticleList(query) {
   return request({
-    url: `${Urls.cmsCategory}`,
+    url: `${Urls.cmsArticle}`,
     method: 'get',
     params: query
   })
 }
 
 // 删除
-export function delCategory(id) {
+export function delArticle(id) {
   return request({
-    url: `${Urls.cmsCategory}/${id}`,
+    url: `${Urls.cmsArticle}/${id}`,
     method: 'delete'
   })
 }
 
 // 根据id获取
-export function getCategory(id) {
+export function getArticle(id) {
   return request({
-    url: `${Urls.cmsCategory}/${id}`,
+    url: `${Urls.cmsArticle}/${id}`,
     method: 'get'
   })
 }
 
 // 添加
-export function addCategory(data) {
+export function addArticle(data) {
   return request({
-    url: `${Urls.cmsCategory}`,
+    url: `${Urls.cmsArticle}`,
     method: 'post',
     data
   })
 }
 
 // 修改
-export function putCategory(id, data) {
+export function putArticle(id, data) {
   return request({
-    url: `${Urls.cmsCategory}/${id}`,
+    url: `${Urls.cmsArticle}/${id}`,
     method: 'put',
     data
   })

@@ -52,11 +52,23 @@
       >操作提示</el-button>
     </el-popover>
 
-    <el-row>
+    <el-row :gutter="10">
       <el-col
         :span="8"
         style="margin-top:15px;"
       >
+        <!-- <el-tree
+          ref="tree"
+          :expand-on-click-node="false"
+          :data="menuList"
+          :props="defaultProps"
+          class="filter-tree"
+          node-key="id"
+          default-expand-all
+          highlight-current
+          @node-click="getMenuData"
+        /> -->
+
         <el-tree
           ref="tree"
           :expand-on-click-node="false"
@@ -67,7 +79,17 @@
           default-expand-all
           highlight-current
           @node-click="getMenuData"
-        />
+        >
+          <span slot-scope="{ node, data }" class="custom-tree-node">
+            <span>{{ node.label }}</span>
+            <span>
+              {{ data.code }}
+            </span>
+            <span>
+              {{ data.type === 'channel' ? '栏目' : data.type === 'page' ? "单页" : '外链' }}
+            </span>
+          </span>
+        </el-tree>
       </el-col>
       <el-col
         :span="16"
@@ -80,7 +102,7 @@
             label-position="right"
             label-width="100px"
           >
-            <el-row :gutter="20">
+            <el-row :gutter="10">
               <el-col :span="12"><div class="grid-content bg-purple"/>
                 <el-form-item
                   label="父级节点"
@@ -418,5 +440,12 @@ export default {
 </script>
 
 <style scoped>
-
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
+  }
 </style>

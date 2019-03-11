@@ -14,5 +14,6 @@ export default {
   roleresources: '/api/admin/v1/roleresources', // 获取角色与资源关联列表
   saveresources: '/api/admin/v1/saveresources', // 保存角色与资源关联
   interface: '/api/v1/interface', // 接口管理
-  category: '/api/admin/v1/category' // 栏目管理
+  cmsCategory: '/api/admin/v1/category', // 栏目管理
+  cmsArticle: '/api/admin/v1/article' // 文章管理
 }
