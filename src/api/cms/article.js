@@ -2,7 +2,7 @@
  * @Author: Benson
  * @Date: 2019-02-18 16:05:04
  * @LastEditors: Benson
- * @LastEditTime: 2019-03-07 11:14:42
+ * @LastEditTime: 2019-03-11 17:52:59
  * @Description: 文章管理
  */
 
@@ -48,6 +48,18 @@ export function putArticle(id, data) {
   return request({
     url: `${Urls.cmsArticle}/${id}`,
     method: 'put',
+    data
+  })
+}
+
+/**
+ * 删除多个
+ * @param {Object} data ids {ids: '1,2,3'}
+ */
+export function deleteArticleIds(data) {
+  return request({
+    url: `${Urls.cmsArticle}`,
+    method: 'delete',
     data
   })
 }

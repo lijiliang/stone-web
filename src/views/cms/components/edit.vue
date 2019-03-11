@@ -42,6 +42,9 @@
                 </el-select>
               </el-form-item>
               <el-form-item
+                :rules="[
+                  { required: true, message: '请输入标题', trigger: ['blur'] },
+                ]"
                 label="标题"
                 prop="title"
               >
@@ -132,7 +135,12 @@
               placeholder="请输入简介"
             />
           </el-form-item>
-          <el-form-item label="内容" prop="content">
+          <el-form-item
+            :rules="[
+              { required: true, message: '请输入内容', trigger: ['blur'] },
+            ]"
+            label="内容"
+            prop="content">
             <tinymce :height="300" v-model="articleform.content"/>
           </el-form-item>
         </el-tab-pane>
@@ -255,9 +263,9 @@ export default {
         'edit': '编辑'
       },
       articleform: {
-        'id': '',
+        // 'id': '',
         'name': '', // 所属栏目
-        'type': '', // 文章类型
+        'type': 'info', // 文章类型
         'title': '',
         'subtitle': '',
         'url': '', // 外链
@@ -312,10 +320,36 @@ export default {
         if (success) {
           this.loading = false
           this.articleform = data
+
+          // 生成自定义参数
+          const _custom_params = this.jsonToArray(data.custom_params)
+          if (_custom_params.length > 0) {
+            this.customParameter = this.jsonToArray(data.custom_params)
+          }
         }
-      } else {
-        console.log('sdf')
       }
+    },
+    // 自定义参数转数组
+    jsonToArray(str) {
+      const obj = str.length > 0 && JSON.parse(str)
+      // const result = []
+      // for (const key in obj) {
+      //   result.push({ key: key, value: obj[key] })
+      // }
+      // return result
+      return Object.keys(obj).map((item, index) => ({ key: item, value: obj[item] }))
+    },
+    // 数组转自定义参数
+    arrayToCustomParams(arr) {
+      const customParams = {}
+      for (var i = 0, len = arr.length; i < len; i++) {
+        const key = arr[i].key
+        const value = arr[i].value
+        if (key) {
+          customParams[key] = value
+        }
+      }
+      return JSON.stringify(customParams)
     },
     // 计算输入数
     descInput(limitValue) {
@@ -324,15 +358,47 @@ export default {
     },
     // 保存
     async handleSave() {
-      // const _data = {
-
-      // }
-      const { data, success } = await articleService.putArticle(this.articleid, this.articleform)
+      this.$refs['articleform'].validate((valid) => {
+        if (valid) {
+          if (this.changestate === 'edit') {
+            this._putArticle()
+          } else {
+            this._addArticle()
+          }
+        } else {
+          return false
+        }
+      })
+    },
+    // 更新文章
+    async _putArticle() {
+      const _data = Object.assign(
+        {},
+        this.articleform,
+        { custom_params: this.arrayToCustomParams(this.customParameter) }
+      )
+      const { success } = await articleService.putArticle(this.articleid, _data)
       if (success) {
-        console.log(data)
         this.activeName = 'first'
         this.$message({
           message: '保存成功！',
+          type: 'success'
+        })
+      }
+    },
+    // 添加文章
+    async _addArticle() {
+      const _data = Object.assign(
+        {},
+        this.articleform,
+        { categoryid: this.categoryid },
+        { custom_params: this.arrayToCustomParams(this.customParameter) }
+      )
+      const { success } = await articleService.addArticle(_data)
+      if (success) {
+        this.loading = false
+        this.$message({
+          message: '添加文章成功！',
           type: 'success'
         })
       }

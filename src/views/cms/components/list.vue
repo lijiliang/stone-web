@@ -22,18 +22,18 @@
         </el-form-item>
       </el-form> -->
     </template>
-    <el-button type="primary" icon="el-icon-circle-plus" @click="handleAddArticle">
+    <el-button v-if="categoryid > 0" type="primary" icon="el-icon-circle-plus" @click="handleAddArticle">
       新增
     </el-button>
     <el-button v-if="multipleSelection.length>0" type="danger" icon="el-icon-delete" @click="handleDeleteIds">
       批量删除
     </el-button>
-    <el-popover placement="top-start" title="温馨提示" width="300" trigger="hover">
+    <!-- <el-popover placement="top-start" title="温馨提示" width="300" trigger="hover">
       <li>`用户名`与`邮箱`组合必须唯一</li>
       <el-button slot="reference" size="mini" icon="el-icon-info" style="float:right">
         操作提示
       </el-button>
-    </el-popover>
+    </el-popover> -->
 
     <!-- :data="tableData.filter(data => !search || data.username.toLowerCase().includes(search.toLowerCase()))" -->
     <el-table
@@ -46,6 +46,7 @@
       @sort-change="handleSortChange"
     >
       <el-table-column
+        v-if="categoryid > 0"
         type="selection"
         width="40"/>
       <el-table-column
@@ -87,6 +88,7 @@
       <el-table-column label="操作" fixed="right" min-width="90">
         <template slot-scope="scope">
           <el-button
+            v-if="categoryid > 0"
             type="primary"
             size="mini"
             round
@@ -97,7 +99,7 @@
             icon="el-icon-delete"
             round
             size="mini"
-            @click="handleDeleteUser(scope.row.id)"/>
+            @click="handleDeleteArticle(scope.row)"/>
         </template>
       </el-table-column>
     </el-table>
@@ -234,13 +236,20 @@ export default {
       this.getList()
     },
     // 删除单个用户
-    handleDeleteUser(userid) {
-      this.$confirm(`您确定要删除这个用户吗？`, '提示', {
+    handleDeleteArticle(row) {
+      if (row.type === 'page') {
+        this.$message({
+          message: '删除单页文章，需要到栏目管理里面直接删除栏目',
+          type: 'warning'
+        })
+        return
+      }
+      this.$confirm(`您确定要删除这篇文章吗？`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        deleteUser(userid).then((res) => {
+        articleService.delArticle(row.id).then((res) => {
           const { success, message } = res || {}
           if (success) {
             this.$message({
@@ -257,11 +266,11 @@ export default {
     handleSelectionChange(arr) {
       this.multipleSelection = arr
 
-      // 取出所有用户id
+      // 取出所有文章id
       this.selectIds = arr.reduce(function(r, item) {
         for (var k in item) {
-          if (k === 'userid') {
-            r.push(item.userid)
+          if (k === 'id') {
+            r.push(item.id)
           }
         }
         return r
@@ -287,9 +296,6 @@ export default {
         articleid: id
       }
       this.$emit('changeArticle', _data)
-      // this.titleState = 'edit'
-      // this.edituserid = userid
-      // this.$store.commit('SET_ADDUSER_VISIBLE', true)
     },
     // 添加文章
     handleAddArticle() {
@@ -299,21 +305,8 @@ export default {
         articleid: 0
       }
       this.$emit('changeArticle', _data)
-      // this.titleState = 'add'
-      // this.edituserid = ''
-      // this.$store.commit('SET_ADDUSER_VISIBLE', true)
     },
-    // 关闭弹出层
-    handleClose(done) {
-      this.edituserid = ''
-      this.$store.commit('SET_ADDUSER_VISIBLE', false)
-    },
-    // 更新或添加用户成功后重新获取更新列表
-    handleUserSuccess(data) {
-      if (data) {
-        this.getList()
-      }
-    },
+
     // 指量删除
     async handleDeleteIds() {
       const ids = this.selectIds
@@ -325,7 +318,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        deleteUserIds(_data).then((res) => {
+        articleService.deleteArticleIds(_data).then((res) => {
           const { success, message, data } = res || {}
           if (success) {
             this.$message({

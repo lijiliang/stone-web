@@ -98,7 +98,7 @@ export default {
       hasList: true, // 是否显示列表
       listTitle: '全部',
       categoryData: {},
-      changestate: 'add', // 文章是编辑还是添加(add:添加，edit编辑)
+      changestate: 'edit', // 文章是编辑还是添加(add:添加，edit编辑)
       categoryid: 0, // 栏目id(获取列表或添加文章时用)
       articleid: 0 // 文章id(编辑文章或单页时用)
     }
@@ -127,7 +127,7 @@ export default {
         this.hasList = false
         this.listTitle = name
         this.articleid = articleid
-        this.changeState = 'edit'
+        this.changestate = 'edit'
       } else {
         this.hasList = true
         this.listTitle = name
