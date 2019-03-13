@@ -230,7 +230,6 @@ export default {
     },
     // 排序
     handleSortChange(val) {
-      console.log(val)
       this.sort.prop = val.prop
       this.sort.order = val.order
       this.getList()

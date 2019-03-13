@@ -137,7 +137,6 @@ export default {
     },
     // 在列表页编辑或新增文章
     handleChangeArticle(data) {
-      console.log(data)
       const { changestate, categoryid, articleid } = data
       this.changestate = changestate
       this.categoryid = categoryid
