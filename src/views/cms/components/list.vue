@@ -95,6 +95,7 @@
             icon="el-icon-edit"
             @click="handleEdit(scope.row.id)"/>
           <el-button
+            v-if="scope.row.type != 'page'"
             type="danger"
             icon="el-icon-delete"
             round
@@ -120,7 +121,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import ContainerFull from '@/components/ContainerFull'
-import { deleteUser, deleteUserIds } from '@/api/user'
 import * as articleService from '@/api/cms/article'
 export default {
   name: 'ArticleList',

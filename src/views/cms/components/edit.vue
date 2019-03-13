@@ -28,7 +28,13 @@
                 label="文章类型"
                 prop="type"
               >
+                <el-input
+                  v-if="articleform.type === 'page'"
+                  :disabled="true"
+                  value="单页"
+                />
                 <el-select
+                  v-if="articleform.type !== 'page'"
                   v-model="articleform.type"
                   class="filter-item"
                   placeholder="请选择类型"
@@ -252,10 +258,6 @@ export default {
         {
           value: 'img',
           label: '图片'
-        },
-        {
-          value: 'page',
-          label: '单页'
         }
       ],
       titleMap: {
@@ -273,8 +275,8 @@ export default {
         'thumbnil': '', // 缩略图
         'tag': '', // 标签
         'sort': 1, // 排序
-        'start_time': '',
-        'end_time': '',
+        'start_time': null,
+        'end_time': null,
         'enable': true, // 是否启用
         'intro': '', // 简介
         'content': '',
@@ -288,6 +290,14 @@ export default {
         meta_description: 0 // seo描述
       },
       customParameter: [ // 自定义参数
+        {
+          key: '',
+          value: ''
+        },
+        {
+          key: '',
+          value: ''
+        },
         {
           key: '',
           value: ''
@@ -323,8 +333,17 @@ export default {
 
           // 生成自定义参数
           const _custom_params = this.jsonToArray(data.custom_params)
-          if (_custom_params.length > 0) {
-            this.customParameter = this.jsonToArray(data.custom_params)
+          const _customLength = _custom_params.length
+          if (_customLength > 0) {
+            var customArr = _custom_params
+            const lastLength = 4 - _customLength
+            for (let i = 0; i <= lastLength; i++) {
+              customArr.push({
+                key: '',
+                value: ''
+              })
+            }
+            this.customParameter = customArr // 重置自定义参数
           }
         }
       }
