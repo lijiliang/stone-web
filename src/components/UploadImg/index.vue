@@ -1,6 +1,6 @@
 <template>
   <div class="upload-container uploadImage">
-    <el-button :style="{background:color,borderColor:color}" icon="el-icon-upload" size="mini" type="primary" @click=" dialogVisible=true">{{ buttonText }} </el-button>
+    <el-button :style="{background:color,borderColor:color}" :disabled="disabled" icon="el-icon-upload" size="mini" type="primary" @click="dialogVisible=true">{{ buttonText }} </el-button>
     <el-dialog :visible.sync="dialogVisible">
       <el-upload
         :multiple="true"
@@ -46,6 +46,10 @@ export default {
     tip: {
       type: String,
       default: ''
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

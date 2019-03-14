@@ -163,6 +163,7 @@
                     :disabled="!formEdit"
                     class="filter-item"
                     placeholder="请选择类型"
+                    style="width: 100%"
                   >
                     <el-option
                       v-for="item in typeOptions"
@@ -187,11 +188,18 @@
                   label="栏目图片"
                   prop="image"
                 >
-                  <el-input
+                  <!-- <el-input
                     v-model="menuform.image"
                     :disabled="!formEdit"
                     placeholder="请输入栏目图"
-                  />
+                  /> -->
+                  <img v-if="menuform.image" :src="menuform.image" class="articleImg">
+                  <UploadImg
+                    :disabled="!formEdit"
+                    :limit="1"
+                    button-text="上传图片"
+                    @successCBK="imageSuccessCBK"/>
+                  <el-button v-if="menuform.image" :disabled="!formEdit" icon="el-icon-delete" size="mini" type="danger" @click="menuform.image=''">删除图片</el-button>
                 </el-form-item>
               </el-col>
               <el-col :span="12"><div class="grid-content bg-purple"/>
@@ -284,10 +292,12 @@
 <script>
 import ContainerFull from '@/components/ContainerFull'
 import * as categoryService from '@/api/cms/category'
+import UploadImg from '@/components/UploadImg'
 export default {
   name: 'CategoryPage',
   components: {
-    ContainerFull
+    ContainerFull,
+    UploadImg
   },
   data() {
     return {
@@ -401,6 +411,10 @@ export default {
       this.currentId = 0
       this.menuform = {}
     },
+    // 图片
+    imageSuccessCBK(arr) {
+      this.menuform.image = arr[0].url
+    },
     // 提交
     async handleSubmit() {
       const { success, message } = await categoryService.addCategory(this.menuform)
@@ -448,4 +462,18 @@ export default {
     font-size: 14px;
     padding-right: 8px;
   }
+</style>
+
+<style lang="scss">
+.articleImg{
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #c0ccda;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 148px;
+  height: 148px;
+  margin: 0 8px 8px 0;
+  float: left;
+}
 </style>
