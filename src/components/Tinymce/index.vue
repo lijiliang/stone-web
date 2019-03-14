@@ -10,7 +10,8 @@
 
 <script>
 // import editorImage from './components/editorImage'
-import uploadImage from './components/uploadImage'
+import uploadImage from '@/components/UploadImg'
+// import uploadImage from './components/uploadImage'
 import plugins from './plugins'
 import toolbar from './toolbar'
 

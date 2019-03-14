@@ -72,19 +72,24 @@
                 label="图片"
                 prop="image"
               >
-                <el-input
-                  v-model="articleform.image"
-                  placeholder="请输入图片"
-                />
+                <img v-if="articleform.image" :src="articleform.image" class="articleImg">
+                <UploadImg
+                  :limit="1"
+                  button-text="上传图片"
+                  @successCBK="imageSuccessCBK"/>
+                <el-button v-if="articleform.image" icon="el-icon-delete" size="mini" type="danger" @click="articleform.image=''">删除图片</el-button>
               </el-form-item>
               <el-form-item
                 label="缩略图"
                 prop="thumbnil"
               >
-                <el-input
-                  v-model="articleform.thumbnil"
-                  placeholder="请输入缩略图"
-                />
+                <img v-if="articleform.thumbnil" :src="articleform.thumbnil" class="articleImg">
+                <UploadImg
+                  :limit="1"
+                  button-text="上传缩略图"
+                  tip="为确保响应式布局，缩略图需要固定尺寸：760*380"
+                  @successCBK="thumbnilSuccessCBK"/>
+                <el-button v-if="articleform.thumbnil" icon="el-icon-delete" size="mini" type="danger" @click="articleform.thumbnil=''">删除缩略图</el-button>
               </el-form-item>
               <el-form-item
                 label="外链"
@@ -222,11 +227,13 @@
 import ContainerFull from '@/components/ContainerFull'
 import Tinymce from '@/components/Tinymce'
 import * as articleService from '@/api/cms/article'
+import UploadImg from '@/components/UploadImg'
 export default {
   name: 'ArticleEdit',
   components: {
     ContainerFull,
-    Tinymce
+    Tinymce,
+    UploadImg
   },
   props: {
     title: {
@@ -377,6 +384,14 @@ export default {
       var txtVal = this.articleform[limitValue].length
       this.limit[limitValue] = txtVal
     },
+    // 图片
+    imageSuccessCBK(arr) {
+      this.articleform.image = arr[0].url
+    },
+    // 缩略图
+    thumbnilSuccessCBK(arr) {
+      this.articleform.thumbnil = arr[0].url
+    },
     // 保存
     async handleSave() {
       this.$refs['articleform'].validate((valid) => {
@@ -434,6 +449,17 @@ export default {
   .el-input{
     width: auto;
   }
+}
+.articleImg{
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #c0ccda;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 148px;
+  height: 148px;
+  margin: 0 8px 8px 0;
+  float: left;
 }
 .tinymce-container .mce-tinymce{
   box-sizing: border-box;
