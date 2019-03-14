@@ -2,19 +2,23 @@
   <div :class="{fullscreen:fullscreen}" class="tinymce-container editor-container">
     <textarea :id="tinymceId" class="tinymce-textarea"/>
     <div class="editor-custom-btn-container">
-      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
+      <!-- <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/> -->
+      <uploadImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
     </div>
   </div>
 </template>
 
 <script>
-import editorImage from './components/editorImage'
+// import editorImage from './components/editorImage'
+import uploadImage from './components/uploadImage'
 import plugins from './plugins'
 import toolbar from './toolbar'
 
 export default {
   name: 'Tinymce',
-  components: { editorImage },
+  components: {
+    // editorImage,
+    uploadImage },
   props: {
     id: {
       type: String,
@@ -62,13 +66,10 @@ export default {
   },
   watch: {
     value(val) {
-      this.$nextTick(() =>
-        window.tinymce.get(this.tinymceId).setContent(val || '')
-      )
-      // if (!this.hasChange && this.hasInit) {
-      //   this.$nextTick(() =>
-      //     window.tinymce.get(this.tinymceId).setContent(val || ''))
-      // }
+      if (!this.hasChange && this.hasInit) {
+        this.$nextTick(() =>
+          window.tinymce.get(this.tinymceId).setContent(val || ''))
+      }
     },
     language() {
       this.destroyTinymce()
@@ -105,7 +106,7 @@ export default {
         code_dialog_width: 1000,
         advlist_bullet_styles: 'square',
         advlist_number_styles: 'default',
-        imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
+        // imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
         default_link_target: '_blank',
         link_title: false,
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin

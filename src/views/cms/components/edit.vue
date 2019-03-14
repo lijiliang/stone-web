@@ -147,7 +147,7 @@
             ]"
             label="内容"
             prop="content">
-            <tinymce :height="300" v-model="articleform.content"/>
+            <tinymce id="tinymce" ref="editContent" :height="500" v-model="articleform.content"/>
           </el-form-item>
         </el-tab-pane>
         <el-tab-pane label="SEO设置" name="second">
@@ -326,10 +326,12 @@ export default {
     async getArticle() {
       if (this.changestate === 'edit') {
         this.loading = true
+        this.articleform.content = ''
         const { data, success } = await articleService.getArticle(this.articleid)
         if (success) {
           this.loading = false
           this.articleform = data
+          this.$refs['editContent'].setContent(data.content)
 
           // 生成自定义参数
           const _custom_params = this.jsonToArray(data.custom_params)
