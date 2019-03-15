@@ -1,14 +1,14 @@
 <template>
   <container-full v-loading="loading" :has-relative="true">
     <template slot="header">
-      {{ title }}-文章列表
-      <!-- <el-form ref="searchForm" :inline="true" :model="searchForm" style="margin-bottom: -18px;">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="searchForm.username" placeholder="用户名" style="width: 120px;" />
+      <div class="header-title">{{ title }}-文章列表</div>
+      <el-form ref="searchForm" :inline="true" :model="searchForm" style="float: right; margin-bottom: -18px;">
+        <el-form-item label="标题" prop="title">
+          <el-input v-model="searchForm.title" placeholder="标题" style="width: 180px;" />
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
+        <!-- <el-form-item label="邮箱" prop="email">
           <el-input v-model="searchForm.email" placeholder="邮箱" style="width: 120px;" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="handleSearchFormSubmit">
             查询
@@ -20,7 +20,7 @@
             重置
           </el-button>
         </el-form-item>
-      </el-form> -->
+      </el-form>
     </template>
     <el-button v-if="categoryid > 0" type="primary" icon="el-icon-circle-plus" @click="handleAddArticle">
       新增
@@ -42,6 +42,7 @@
       stripe
       highlight-current-row
       style="width: 100%"
+      class="table-center"
       @selection-change="handleSelectionChange"
       @sort-change="handleSortChange"
     >
@@ -58,13 +59,13 @@
           <span>{{ scope.row.username }}{{ scope.row.user_type == 1 ? '(管理员)': '' }}</span>
         </template> -->
       </el-table-column>
-      <el-table-column prop="type" label="类型" width="60">
+      <el-table-column prop="type" label="类型" min-width="60" align="center">
         <template slot-scope="scope">
           <span>{{ typeMap[scope.row.type] }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="sort" label="排序" width="60"/>
-      <el-table-column prop="created_at" label="创建时间" min-width="100">
+      <el-table-column :show-overflow-tooltip="true" align="center" sortable="custom" prop="sort" label="排序" width="70" style="text-align: center;"/>
+      <el-table-column prop="created_at" align="center" label="创建时间" min-width="100">
         <template slot-scope="scope">
           <div class="at-text">
             <span>{{ scope.row.created_at }}</span>
@@ -72,7 +73,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="updated_at" label="修改时间" min-width="100">
+      <el-table-column prop="updated_at" align="center" label="修改时间" min-width="100">
         <template slot-scope="scope">
           <div class="at-text">
             <span>{{ scope.row.updated_at }}</span>
@@ -80,12 +81,12 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="enable" label="状态">
+      <el-table-column prop="enable" label="状态" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.enable ? '启用' : '禁用' }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" fixed="right" min-width="90">
+      <el-table-column label="操作" fixed="right" min-width="90" align="center">
         <template slot-scope="scope">
           <el-button
             v-if="categoryid > 0"
@@ -152,8 +153,7 @@ export default {
     return {
       loading: false,
       searchForm: {
-        username: '',
-        email: ''
+        title: ''
       },
       sort: {
         prop: '',
@@ -205,7 +205,8 @@ export default {
         pageSize: this.page.pageSize,
         sortBy: this.sort.prop,
         descending: this.sort.order === 'descending',
-        filter: { ...this.searchForm }
+        ...this.searchForm
+        // filter: { ...this.searchForm }
         // ...this.searchForm
       }
       if (this.categoryid > 0) {
@@ -340,5 +341,9 @@ export default {
   span{
     display: block;
   }
+}
+.header-title{
+  display: inline-block;
+  padding-top: 10px;
 }
 </style>
