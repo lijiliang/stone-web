@@ -6,9 +6,6 @@
         <el-form-item label="标题" prop="title">
           <el-input v-model="searchForm.title" placeholder="标题" style="width: 180px;" />
         </el-form-item>
-        <!-- <el-form-item label="邮箱" prop="email">
-          <el-input v-model="searchForm.email" placeholder="邮箱" style="width: 120px;" />
-        </el-form-item> -->
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="handleSearchFormSubmit">
             查询
@@ -28,14 +25,7 @@
     <el-button v-if="multipleSelection.length>0" type="danger" icon="el-icon-delete" @click="handleDeleteIds">
       批量删除
     </el-button>
-    <!-- <el-popover placement="top-start" title="温馨提示" width="300" trigger="hover">
-      <li>`用户名`与`邮箱`组合必须唯一</li>
-      <el-button slot="reference" size="mini" icon="el-icon-info" style="float:right">
-        操作提示
-      </el-button>
-    </el-popover> -->
 
-    <!-- :data="tableData.filter(data => !search || data.username.toLowerCase().includes(search.toLowerCase()))" -->
     <el-table
       v-loading="loading"
       :data="tableData"

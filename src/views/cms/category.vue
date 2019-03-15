@@ -1,74 +1,10 @@
 <template>
-  <container-full>
-    <el-button-group>
-      <el-button
-        type="primary"
-        icon="el-icon-circle-plus-outline"
-        size="mini"
-        @click="add"
-      >添加</el-button>
-      <el-button
-        :disabled="!currentId"
-        type="primary"
-        icon="el-icon-edit"
-        size="mini"
-        @click="edit"
-      >编辑</el-button>
-      <el-button
-        :disabled="!currentId"
-        type="primary"
-        icon="el-icon-delete"
-        size="mini"
-        @click="del"
-      >删除</el-button>
-      <el-button
-        :disabled="!currentId"
-        type="primary"
-        icon="el-icon-circle-close-outline"
-        size="mini"
-        @click="cancel"
-      >取消</el-button>
-      <!-- <el-button
-        v-permission="['p_menu_edit']"
-        type="primary"
-        icon="el-icon-edit"
-        size="mini"
-        @click="batchEdit"
-      >批量编辑</el-button> -->
-    </el-button-group>
-    <el-popover
-      placement="top-start"
-      title="温馨提示"
-      width="400"
-      trigger="hover"
-    >
-      <li>请不要在`功能`类型节点下建子节点</li>
-      <li>`菜单`类型节点的权限标识请设置为其某个`功能`类型子节点的权限标识</li>
-      <el-button
-        slot="reference"
-        size="mini"
-        icon="el-icon-info"
-        style="float:right"
-      >操作提示</el-button>
-    </el-popover>
-
-    <el-row :gutter="10">
+  <container-full class="category-container">
+    <el-row type="flex" class="h-full">
       <el-col
         :span="8"
-        style="margin-top:15px;"
+        style="padding-top:15px; border-right: 1px solid #ebeef5;"
       >
-        <!-- <el-tree
-          ref="tree"
-          :expand-on-click-node="false"
-          :data="menuList"
-          :props="defaultProps"
-          class="filter-tree"
-          node-key="id"
-          default-expand-all
-          highlight-current
-          @node-click="getMenuData"
-        /> -->
-
         <el-tree
           ref="tree"
           :expand-on-click-node="false"
@@ -78,6 +14,7 @@
           node-key="id"
           default-expand-all
           highlight-current
+          style="padding-right: 10px;"
           @node-click="getMenuData"
         >
           <span slot-scope="{ node, data }" class="custom-tree-node">
@@ -93,9 +30,54 @@
       </el-col>
       <el-col
         :span="16"
-        style="margin-top:15px;"
       >
-        <el-card shadow="always">
+        <container-full :has-relative="true">
+          <template slot="header">
+            <el-button-group>
+              <el-button
+                type="primary"
+                icon="el-icon-circle-plus-outline"
+                size="mini"
+                @click="add"
+              >添加</el-button>
+              <el-button
+                :disabled="!currentId"
+                type="primary"
+                icon="el-icon-edit"
+                size="mini"
+                @click="edit"
+              >编辑</el-button>
+              <el-button
+                :disabled="!currentId"
+                type="primary"
+                icon="el-icon-delete"
+                size="mini"
+                @click="del"
+              >删除</el-button>
+              <el-button
+                :disabled="!currentId"
+                type="primary"
+                icon="el-icon-circle-close-outline"
+                size="mini"
+                @click="cancel"
+              >取消</el-button>
+            </el-button-group>
+            <el-popover
+              placement="top-start"
+              title="温馨提示"
+              width="400"
+              trigger="hover"
+            >
+              <li>请不要在`功能`类型节点下建子节点</li>
+              <li>`菜单`类型节点的权限标识请设置为其某个`功能`类型子节点的权限标识</li>
+              <el-button
+                slot="reference"
+                size="mini"
+                icon="el-icon-info"
+                style="float:right"
+              >操作提示</el-button>
+            </el-popover>
+          </template>
           <el-form
             ref="menuform"
             :model="menuform"
@@ -255,11 +237,7 @@
                   label="排序"
                   prop="sort"
                 >
-                  <el-input
-                    v-model.number="menuform.sort"
-                    :disabled="!formEdit"
-                    placeholder="请输入排序"
-                  />
+                  <el-input-number v-model="menuform.sort" :disabled="!formEdit" :min="0" :max="1000" controls-position="right"/>
                 </el-form-item>
                 <el-form-item label="是否启用" prop="enable">
                   <el-switch v-model="menuform.enable" :disabled="!formEdit"/>
@@ -267,19 +245,27 @@
               </el-col>
             </el-row>
 
-            <el-form-item v-if="formEdit">
-              <el-button
-                type="primary"
-                @click="handleSubmit"
-              >提交</el-button>
-              <el-button @click="handleReset">清空</el-button>
-              <!-- <el-button
+            <!-- <el-form-item v-if="formEdit">
+                <el-button
+                  type="primary"
+                  @click="handleSubmit"
+                >提交</el-button>
+                <el-button @click="handleReset">清空</el-button> -->
+            <!-- <el-button
                 v-if="menuform.id&&menuform.type==2"
                 @click="openInterfaceDialog"
               >关联接口</el-button> -->
-            </el-form-item>
+            <!-- </el-form-item> -->
           </el-form>
-        </el-card>
+          <template slot="footer">
+            <el-button
+              v-if="formEdit"
+              type="primary"
+              @click="handleSubmit"
+            >提交</el-button>
+            <el-button v-if="formEdit" @click="handleReset">清空</el-button>
+          </template>
+        </container-full>
       </el-col>
     </el-row>
     <!-- <edit-form
@@ -465,6 +451,11 @@ export default {
 </style>
 
 <style lang="scss">
+.category-container {
+  .container-full__body{
+    padding: 0;
+  }
+}
 .articleImg{
   overflow: hidden;
   background-color: #fff;
