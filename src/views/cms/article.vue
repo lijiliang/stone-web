@@ -34,6 +34,7 @@
           :changestate="changestate"
           :articleid="articleid"
           :categoryid="categoryid"
+          @editSuccessCb="handleEditSuccess"
         />
       </el-col>
     </el-row>
@@ -142,6 +143,11 @@ export default {
       this.categoryid = categoryid
       this.articleid = articleid
       this.hasList = false
+    },
+    // 添加文章成功
+    handleEditSuccess(categoryid) {
+      this.categoryid = categoryid
+      this.hasList = true
     }
   }
 

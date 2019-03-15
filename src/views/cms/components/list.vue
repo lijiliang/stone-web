@@ -83,7 +83,7 @@
       </el-table-column>
       <el-table-column prop="enable" label="状态" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.enable ? '启用' : '禁用' }}</span>
+          <span :class="scope.row.enable ? 'state_yes' : 'state_no'">{{ scope.row.enable ? '启用' : '禁用' }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" min-width="90" align="center">

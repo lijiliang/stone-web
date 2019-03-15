@@ -437,6 +437,7 @@ export default {
           message: '添加文章成功！',
           type: 'success'
         })
+        this.$emit('editSuccessCb', this.categoryid)
       }
     }
   }
