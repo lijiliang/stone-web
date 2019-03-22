@@ -83,6 +83,7 @@
             :model="menuform"
             label-position="right"
             label-width="100px"
+            style="padding: 10px;"
           >
             <el-row :gutter="10">
               <el-col :span="12"><div class="grid-content bg-purple"/>

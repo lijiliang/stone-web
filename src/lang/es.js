@@ -11,6 +11,7 @@ export default {
     cms: 'cms',
     cmsCategory: 'Category',
     cmsArticle: 'Article',
+    cmsRecommend: 'Recommend',
     Icons: 'icons',
     dashboard: 'Panel de control',
     introduction: 'Introducción',

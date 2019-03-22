@@ -11,6 +11,7 @@ export default {
     cms: '官网管理',
     cmsCategory: '栏目管理',
     cmsArticle: '文章管理',
+    cmsRecommend: '推荐位管理',
     Icons: '自定义图标',
     dashboard: '首页',
     introduction: '简述',

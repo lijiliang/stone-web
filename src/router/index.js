@@ -431,6 +431,10 @@ export const routerComponents = {
   cmsArticle: {
     component: () => import('@/views/cms/article')
   },
+  // 推荐位管理
+  cmsRecommend: {
+    component: () => import('@/views/cms/recommend')
+  },
   TinymceDemo: {
     component: () => import('@/views/components-demo/tinymce')
   },
