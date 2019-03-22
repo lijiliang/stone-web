@@ -16,5 +16,6 @@ export default {
   interface: '/api/v1/interface', // 接口管理
   cmsCategory: '/api/admin/v1/category', // 栏目管理
   cmsArticle: '/api/admin/v1/article', // 文章管理
+  cmsRecommend: '/api/admin/v1/recommend', // 推荐位管理
   upload: '/api/v1/upload' // 上传单文件到七牛云
 }
